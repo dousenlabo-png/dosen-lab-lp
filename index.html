@@ -6,30 +6,234 @@
   <title>導線ラボ｜48時間で導線納品</title>
   <meta name="description" content="小さなお店向けに、LP＋フォーム＋自動返信＋顧客管理を48時間で納品します（49,800円〜）。" />
   <style>
-    :root { --bg:#0b0b0c; --card:#111114; --text:#f4f4f5; --muted:#a1a1aa; --line:#2a2a2f; }
-    body{ margin:0; font-family: ui-sans-serif, system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
-      background:var(--bg); color:var(--text); }
-    a{ color:inherit; }
-    .wrap{ max-width: 920px; margin: 0 auto; padding: 28px 18px 72px; }
-    .nav{ display:flex; justify-content:space-between; align-items:center; padding: 10px 0 18px; }
-    .brand{ font-weight: 800; letter-spacing: .04em; }
-    .pill{ border:1px solid var(--line); padding: 6px 10px; border-radius: 999px; color: var(--muted); font-size: 12px; }
-    .hero{ padding: 26px 0 8px; }
-    h1{ font-size: clamp(30px, 5vw, 46px); margin: 10px 0 10px; line-height: 1.1; }
-    .sub{ color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 52ch; }
-    .ctaRow{ display:flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 6px; }
-    .btn{ display:inline-block; text-decoration:none; padding: 12px 16px; border-radius: 12px; border:1px solid var(--line); background: var(--card); }
-    .btn.primary{ background: var(--text); color: #0b0b0c; border-color: transparent; font-weight: 700; }
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
+
+    :root{
+      --bg: #f6f3ee;
+      --bg-2: #eef4f3;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --accent: #0d9488;
+      --accent-2: #f97316;
+      --shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+      --soft: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 700px at 90% 0%, #e9f5f1 0%, rgba(233,245,241,0) 55%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      color: var(--text);
+    }
+    a{ color: inherit; }
+
+    .wrap{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 28px 20px 90px;
+      position: relative;
+    }
+    .wrap::before{
+      content:"";
+      position:absolute;
+      top: 140px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(13,148,136,0.18) 0%, rgba(13,148,136,0) 70%);
+      filter: blur(2px);
+      z-index: 0;
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: 8px 0 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .brand{
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .pill{
+      border:1px solid var(--line);
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(6px);
+    }
+
+    .hero{
+      padding: 26px 0 14px;
+      position: relative;
+      z-index: 1;
+    }
+    h1{
+      font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+      font-size: clamp(34px, 5.2vw, 54px);
+      margin: 12px 0 14px;
+      line-height: 1.15;
+      letter-spacing: .02em;
+    }
+    .accent{
+      color: var(--accent);
+      background: linear-gradient(90deg, rgba(13,148,136,0.12), rgba(249,115,22,0.12));
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.9;
+      max-width: 60ch;
+    }
+    .sub b{
+      color: var(--text);
+      background: rgba(13,148,136,0.12);
+      padding: 2px 6px;
+      border-radius: 8px;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 22px 0 8px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      text-decoration:none;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: var(--card);
+      font-weight: 600;
+      box-shadow: var(--soft);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(13,148,136,0.4); }
+    .btn.primary{
+      background: linear-gradient(135deg, var(--accent) 0%, #0f766e 55%, #115e59 100%);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 18px 40px rgba(13,148,136,0.28);
+      font-weight: 700;
+    }
     .btn:active{ transform: translateY(1px); }
-    .grid{ display:grid; grid-template-columns: repeat(12, 1fr); gap: 12px; margin-top: 18px; }
-    .card{ grid-column: span 12; border:1px solid var(--line); background: var(--card); border-radius: 18px; padding: 16px; }
-    @media (min-width: 760px){ .card.half{ grid-column: span 6; } }
-    .title{ font-weight: 800; margin: 0 0 10px; }
-    ul{ margin: 10px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.8; }
-    .price{ font-size: 24px; font-weight: 900; margin: 4px 0 6px; }
-    .small{ color: var(--muted); font-size: 13px; line-height: 1.7; }
-    .hr{ height:1px; background: var(--line); margin: 22px 0; }
-    .footer{ color: var(--muted); font-size: 12px; margin-top: 26px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 26px;
+    }
+    .card{
+      grid-column: span 12;
+      border:1px solid var(--line);
+      background: var(--card);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      inset: 0;
+      background: radial-gradient(140px 140px at 95% 5%, rgba(249,115,22,0.15), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+    .card.half{ grid-column: span 12; }
+    @media (min-width: 760px){
+      .card.half{ grid-column: span 6; }
+    }
+    .card.price-card{
+      border: 1px solid rgba(13,148,136,0.35);
+      background: linear-gradient(160deg, #ffffff 0%, #f1fbf9 60%, #fff8f2 100%);
+      box-shadow: var(--shadow);
+    }
+    .title{
+      font-weight: 800;
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+    ul{
+      margin: 10px 0 0;
+      padding-left: 0;
+      color: var(--muted);
+      line-height: 1.9;
+      list-style: none;
+    }
+    ul li{
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 6px;
+    }
+    ul li::before{
+      content:"";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+    .price{
+      font-size: 28px;
+      font-weight: 900;
+      margin: 4px 0 8px;
+      letter-spacing: .02em;
+    }
+    .small{
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .hr{
+      height:1px;
+      background: linear-gradient(90deg, rgba(13,148,136,0.2), rgba(249,115,22,0.2), rgba(15,23,42,0));
+      margin: 26px 0;
+    }
+    .footer{
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 30px;
+    }
+
+    .reveal{
+      animation: floatIn .8s ease both;
+    }
+    .grid .card:nth-child(1){ animation-delay: .05s; }
+    .grid .card:nth-child(2){ animation-delay: .1s; }
+    .grid .card:nth-child(3){ animation-delay: .15s; }
+    .grid .card:nth-child(4){ animation-delay: .2s; }
+    .grid .card:nth-child(5){ animation-delay: .25s; }
+
+    @keyframes floatIn{
+      from{ opacity: 0; transform: translateY(14px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px){
+      .wrap{ padding-bottom: 70px; }
+      .btn{ width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -40,7 +244,7 @@
     </div>
 
     <section class="hero">
-      <h1>予約・申込が迷子にならない導線を<br>48時間で組みます</h1>
+      <h1>予約・申込が迷子にならない導線を<br><span class="accent">48時間</span>で組みます</h1>
       <p class="sub">
         小さなお店向けに <b>LP / 申込フォーム / 自動返信 / 顧客管理</b> を完成品で納品。<br>
         まずは無料で「導線5分診断」をお送りします（テキストで返答）。
@@ -48,7 +252,7 @@
 
       <div class="ctaRow">
         <!-- ▼ここにあなたのGoogleフォームURLを入れる -->
-        <a class="btn primary" href="YOUR_GOOGLE_FORM_URL" target="_blank" rel="noopener">無料で相談する（フォーム）</a>
+        <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLScV4mmFXCKPq_tDgMti5rovvTRJ6LLJ5TeKdWqmMoblW3uFmw/viewform?usp=dialog" target="_blank" rel="noopener">無料で相談する（フォーム）</a>
         <a class="btn" href="#detail">内容を見る</a>
       </div>
       <p class="small">対象：整体 / サロン / パーソナル / スクール / 小規模店舗 など</p>
@@ -57,7 +261,7 @@
     <div class="hr"></div>
 
     <section id="detail" class="grid">
-      <div class="card half">
+      <div class="card half reveal">
         <p class="title">48時間で作るもの（スターター）</p>
         <ul>
           <li>1ページLP（スマホ最適化）</li>
@@ -67,7 +271,7 @@
         </ul>
       </div>
 
-      <div class="card half">
+      <div class="card half price-card reveal">
         <p class="title">料金</p>
         <div class="price">49,800円〜</div>
         <p class="small">
@@ -76,7 +280,7 @@
         </p>
       </div>
 
-      <div class="card half">
+      <div class="card half reveal">
         <p class="title">流れ（最短）</p>
         <ul>
           <li>① 相談フォーム送信（無料）</li>
@@ -85,7 +289,7 @@
         </ul>
       </div>
 
-      <div class="card half">
+      <div class="card half reveal">
         <p class="title">よくある質問</p>
         <ul>
           <li><b>Q.</b> まだ何も用意してなくても大丈夫？ → <b>A.</b> 大丈夫。ヒアリングに答えるだけで形にします。</li>
@@ -94,7 +298,7 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <p class="title">無料で導線診断を受ける</p>
         <p class="small">フォームに入力→24時間以内に「改善ポイント3つ」を返します。</p>
         <div class="ctaRow">
